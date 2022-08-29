@@ -1,0 +1,11 @@
+name: Verify License
+on:
+  workflow_dispatch: {}
+jobs:
+  activation:
+    name: Verify the Unity License
+    runs-on: ubuntu-latest
+    steps:
+      # Verify
+      - name: Unity - Activate
+        uses: game-ci/unity-activate@v2.0.0
