@@ -31,7 +31,7 @@ jobs:
 
       # Cache
       - name: Restore Library Cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ${{ matrix.projectPath }}/Library
           key: Library-${{ matrix.projectPath }}-${{ matrix.targetPlatform }}-${{ hashFiles(matrix.projectPath) }}
@@ -52,7 +52,7 @@ jobs:
           targetPlatform: ${{ matrix.targetPlatform }}
 
       # Upload
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: build-${{ matrix.targetPlatform }}
           path: build/${{ matrix.targetPlatform }}
@@ -73,7 +73,7 @@ jobs:
 
       # Download Build
       - name: Download Build
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: build-WebGL
           path: build
