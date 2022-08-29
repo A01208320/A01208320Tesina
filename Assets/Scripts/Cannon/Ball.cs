@@ -2,33 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ball : MonoBehaviour
-{
+public class Ball : MonoBehaviour {
     private Rigidbody rb;
     private bool onGround = false;
 
-    private void Awake()
-    {
+    private void Awake() {
         rb = GetComponent<Rigidbody>();
     }
-    private void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.CompareTag("Ground"))
-        {
-            onGround = true;
-        }
-        else if (other.gameObject.CompareTag("Target"))
-        {
-            Debug.Log("HIT!");
-            onGround = true;
+
+    private void OnCollisionEnter(Collision other) {
+        if (other.gameObject.CompareTag("Ground")) {
+            Stop();
+        } else if (other.gameObject.CompareTag("Target")) {
+            Stop();
         }
     }
 
-    private void Update()
-    {
-        if (onGround)
-        {
-            rb.velocity = Vector3.zero;
-        }
+    private void Stop() {
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        GetComponent<ParticleSystem>().Stop();
+        Destroy(gameObject, 2);
     }
 }
