@@ -11,7 +11,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Cannon_Practice_Free.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
-    path: Assets/Scenes/Cannon_Practice_Target.unity
-    guid: e8f0fa6399166d84786a0ee04dfd6180
   m_configObjects: {}
