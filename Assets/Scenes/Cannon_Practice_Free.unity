@@ -1702,6 +1702,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  offset: {x: 0, y: 0, z: 0}
+  smoothTime: 0.3
+  velocity: {x: 0, y: 0, z: 0}
 --- !u!1 &998913828
 GameObject:
   m_ObjectHideFlags: 0

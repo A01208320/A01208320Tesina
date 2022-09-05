@@ -21,9 +21,7 @@ public class Ball : MonoBehaviour {
             Stop();
         } else if (other.gameObject.CompareTag("Target")) {
             other.gameObject.GetComponent<Target>().gotHit();
-            Destroy(gameObject);
-            GameManager.instance.ballLanded();
-            GameManager.instance.cam.setTarget(GameManager.instance.cannon.transform, new Vector3(0, 4, -4));
+            clean();
         }
     }
 
@@ -31,9 +29,12 @@ public class Ball : MonoBehaviour {
         onGround = true;
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
-        GetComponent<ParticleSystem>().Stop();
-        Destroy(gameObject);
+        clean();
+    }
+
+    private void clean() {
         GameManager.instance.ballLanded();
-        GameManager.instance.cam.setTarget(GameManager.instance.cannon.transform, new Vector3(0, 4, -4));
+        GameManager.instance.cam.setTarget(GameManager.instance.cannon.transform, new Vector3(0, 3, -5));
+        Destroy(gameObject);
     }
 }

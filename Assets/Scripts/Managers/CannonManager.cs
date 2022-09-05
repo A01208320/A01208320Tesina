@@ -30,6 +30,8 @@ public class CannonManager : MonoBehaviour {
             this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.Euler(-aV, aH, 0), count);
             if (1.2f <= count) {
                 movingCannon = false;
+                float calc = (V0 * V0 * Mathf.Sin(2 * aV * (Mathf.PI / 180))) / -Physics.gravity.y;
+                GameManager.instance.ui.setDistanceC(calc.ToString());
                 Fire();
             }
         }
@@ -38,7 +40,7 @@ public class CannonManager : MonoBehaviour {
     public void Fire() {
         firingDirection = (transform.position - firingPoint.position).normalized;
         GameObject g = Instantiate(ball, transform);
-        GameManager.instance.cam.setTarget(g.transform, new Vector3(0, 4, -4));
+        GameManager.instance.cam.setTarget(g.transform, new Vector3(0, 1, -1));
         Rigidbody rb = g.GetComponent<Rigidbody>();
         rb.velocity = firingDirection * -V0;
     }

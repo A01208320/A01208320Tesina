@@ -4,18 +4,24 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour {
     [SerializeField] private Transform target;
-    private Vector3 offset;
+    [SerializeField] private Vector3 offset;
+    [SerializeField] private float smoothTime;
+    [SerializeField] private Vector3 velocity;
     private void Awake() {
         GameManager.instance.cam = this;
     }
-
-    public void setTarget(Transform tar, Vector3 vec) {
-        target = tar;
-        offset = vec;
-        transform.position = target.position + offset;
+    private void Start() {
+        velocity = Vector3.zero;
     }
 
-    private void Update() {
-        //transform.position = target.position + offset;
+    public void setTarget(Transform target, Vector3 offset) {
+        this.target = target;
+        this.offset = offset;
+    }
+
+    private void LateUpdate() {
+        Vector3 posTarget = target.position + offset;
+        transform.position = Vector3.SmoothDamp(transform.position, posTarget, ref velocity, smoothTime);
+        transform.LookAt(target);
     }
 }
