@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraManager : MonoBehaviour {
-    private Transform target;
+    [SerializeField] private Transform target;
     private Vector3 offset;
     private void Awake() {
         GameManager.instance.cam = this;
@@ -16,5 +16,6 @@ public class CameraManager : MonoBehaviour {
     }
 
     private void Update() {
+        //transform.position = target.position + offset;
     }
 }
