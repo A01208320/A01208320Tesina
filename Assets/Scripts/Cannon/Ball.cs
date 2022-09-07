@@ -12,6 +12,7 @@ public class Ball : MonoBehaviour {
 
     private void Update() {
         if (!onGround) {
+            transform.forward = rb.velocity;
             GameManager.instance.ui.setDistanceA(Vector3.Distance(Vector3.zero, new Vector3(transform.position.x, 0, transform.position.z)).ToString());
         }
     }
@@ -34,7 +35,7 @@ public class Ball : MonoBehaviour {
 
     private void clean() {
         GameManager.instance.ballLanded();
-        GameManager.instance.cam.setTarget(GameManager.instance.cannon.transform, new Vector3(0, 3, -5));
+        GameManager.instance.cam.setTarget(GameManager.instance.cannon.transform, new Vector3(0, 4, -3), 30, 0.3f, CameraManager.typeCam.cannon);
         Destroy(gameObject);
     }
 }

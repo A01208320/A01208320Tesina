@@ -18,7 +18,7 @@ public class CannonManager : MonoBehaviour {
     }
 
     private void Start() {
-        GameManager.instance.cam.setTarget(this.gameObject.transform, new Vector3(0, 4, -4));
+        GameManager.instance.cam.setTarget(this.gameObject.transform, new Vector3(0, 4, -3), 30, 0.3f, CameraManager.typeCam.cannon);
         GameManager.instance.ui.showPanelValues();
         firingPoint = transform.GetChild(0).transform;
         movingCannon = false;
@@ -40,7 +40,7 @@ public class CannonManager : MonoBehaviour {
     public void Fire() {
         firingDirection = (transform.position - firingPoint.position).normalized;
         GameObject g = Instantiate(ball, transform);
-        GameManager.instance.cam.setTarget(g.transform, new Vector3(0, 1, -1));
+        GameManager.instance.cam.setTarget(g.transform, new Vector3(0, 1, -1), 50, 0.2f, CameraManager.typeCam.ball);
         Rigidbody rb = g.GetComponent<Rigidbody>();
         rb.velocity = firingDirection * -V0;
     }
