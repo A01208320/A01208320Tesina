@@ -872,7 +872,7 @@ MonoBehaviour:
   cam: {fileID: 0}
   ui: {fileID: 0}
   enemy: {fileID: 0}
-  difficulty: 1
+  difficulty: 2
 --- !u!1 &245002977
 GameObject:
   m_ObjectHideFlags: 0
@@ -1496,7 +1496,7 @@ Animator:
   m_GameObject: {fileID: 998913828}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 025b65d78db79a24799acc59003dd74c, type: 2}
+  m_Controller: {fileID: 9100000, guid: 7cfce470522de544dbe5bbc2223df068, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
