@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour {
     [SerializeField] private Transform target;
+    [SerializeField] private Vector3 point;
     [SerializeField] private Vector3 offset;
     [SerializeField] private float angleOffset;
     [SerializeField] private float smoothTime;
@@ -26,12 +27,31 @@ public class CameraManager : MonoBehaviour {
         velocity = Vector3.zero;
     }
 
-    public void setTarget(Transform target, Vector3 offset, float angleOffset, float smoothTime, typeCam type) {
+    IEnumerator rotate(int wait) {
+        yield return new WaitForSeconds(wait);
+        GameManager.instance.ballLanded();
+    }
+
+    public void targetCannon() {
+        target = GameManager.instance.cannon.transform;
+        offset = new Vector3(0, 4, -3);
+        angleOffset = 30;
+        smoothTime = 0.3f;
+        type = typeCam.cannon;
+    }
+
+    public void targetBall(Transform target) {
         this.target = target;
-        this.offset = offset;
-        this.angleOffset = angleOffset;
-        this.smoothTime = smoothTime;
-        this.type = type;
+        offset = new Vector3(0, 1, -1);
+        angleOffset = 50;
+        smoothTime = 0.2f;
+        type = typeCam.ball;
+    }
+
+    public void targetPoint(Vector3 point, int wait) {
+        this.point = point;
+        type = typeCam.circlePoint;
+        StartCoroutine(rotate(wait));
     }
 
     private void LateUpdate() {
@@ -43,6 +63,7 @@ public class CameraManager : MonoBehaviour {
                 followBall();
                 break;
             case typeCam.circlePoint:
+                circlePoint();
                 break;
             default:
                 posTarget = transform.position;
@@ -63,22 +84,7 @@ public class CameraManager : MonoBehaviour {
         angleTarget = Quaternion.Euler(Vector3.right * 360 + target.rotation.eulerAngles);
     }
 
-    private void followTarget() {
-        transform.rotation = Quaternion.Euler(Vector3.right * 360 + target.rotation.eulerAngles);
-        Vector3 posTarget = target.position - target.forward * offset.z + target.up * offset.y;
-        transform.position = Vector3.SmoothDamp(transform.position, posTarget, ref velocity, smoothTime);
+    private void circlePoint() {
 
-    }
-
-    private void targetCannon() {
-        Vector3 posTarget = target.position + offset;
-        transform.position = Vector3.SmoothDamp(transform.position, posTarget, ref velocity, smoothTime);
-        transform.rotation = Quaternion.Euler(Vector3.SmoothDamp(transform.rotation.eulerAngles, Vector3.zero, ref velocity, smoothTime));
-    }
-
-    private void targetBall() {
-        Vector3 posTarget = (target.position + offset) - transform.forward;
-        transform.position = Vector3.SmoothDamp(transform.position, posTarget, ref velocity, smoothTime);
-        transform.rotation = target.rotation;
     }
 }

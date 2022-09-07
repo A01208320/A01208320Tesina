@@ -4,13 +4,9 @@ using UnityEngine;
 using TMPro;
 
 public class Panel_Distance : MonoBehaviour {
-    [SerializeField] TextMeshProUGUI DistanciaReal;
-    [SerializeField] TextMeshProUGUI DistanciaCalc;
+    [SerializeField] TextMeshProUGUI Distancia;
 
-    public void setDistanceReal(string text) {
-        DistanciaReal.text = text;
-    }
-    public void setDistanceCalc(string text) {
-        DistanciaCalc.text = text;
+    public void setDistance(string text) {
+        Distancia.text = text;
     }
 }
