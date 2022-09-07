@@ -11,28 +11,38 @@ public class GameManager : MonoBehaviour {
             instance = this;
         }
     }
+    public enum Difficulty { none, free, practice, easy, medium, hard }
 
     public CannonManager cannon;
     public CameraManager cam;
     public UIManager ui;
     public EnemyManager enemy;
 
-    private bool cannonTurn = true;
+    public Difficulty difficulty;
+
 
     public void LoadScene(Loader.Scene scene) {
         Loader.Load(scene);
     }
 
-    public void cannonShoot(float V0, float av, float ah) {
+    public void startGame() {
+        cam.targetCannon();
+        ui.showUI(true);
+        enemy.step();
+    }
+
+    public void cannonShoot(float V0, float av) {
         ui.PanelValues.disableInteractable();
-        ui.showPanelDistance();
-        cannon.setValues(V0, av, ah);
+        ui.showUI(false);
+        cannon.setValues(V0, av, 0);
         cannon.moveCannon();
     }
 
     public void ballLanded() {
+        enemy.step();
+        cam.targetCannon();
         ui.PanelValues.enableInteractable();
-        ui.showPanelValues();
+        ui.showUI(true);
     }
 
 

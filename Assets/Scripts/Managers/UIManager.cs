@@ -10,19 +10,11 @@ public class UIManager : MonoBehaviour {
         GameManager.instance.ui = this;
     }
 
-    public void showPanelValues() {
-        PanelValues.GetComponent<Animator>().SetBool("Show", true);
-        PanelDistance.GetComponent<Animator>().SetBool("Show", false);
-    }
-    public void showPanelDistance() {
-        PanelDistance.GetComponent<Animator>().SetBool("Show", true);
-        PanelValues.GetComponent<Animator>().SetBool("Show", false);
+    public void showUI(bool show) {
+        GetComponent<Animator>().SetBool("Show", show);
     }
 
-    public void setDistanceA(string distance) {
-        PanelDistance.setDistanceReal(distance);
-    }
-    public void setDistanceC(string distance) {
-        PanelDistance.setDistanceCalc(distance);
+    public void setDistance(string distance) {
+        PanelDistance.setDistance(distance);
     }
 }
