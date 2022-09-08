@@ -27,10 +27,14 @@ public class Ball : MonoBehaviour {
             GameManager.instance.ui.setDistance(GameManager.instance.cannon.calc.ToString());
         }
         if (other.gameObject.CompareTag("Ground")) {
-            GameManager.instance.cam.targetPoint(transform.position, 2);
+            if (GameManager.instance.difficulty == GameManager.Difficulty.free) {
+                GameManager.instance.cam.targetPoint(transform.position, transform.position);
+            } else {
+                GameManager.instance.cam.targetPoint(transform.position, GameManager.instance.enemy.getSelected().position);
+            }
             Destroy(gameObject, 2);
         } else if (other.gameObject.CompareTag("Target")) {
-            other.gameObject.GetComponent<Enemy>().gotHit();
+            other.gameObject.GetComponent<Enemy>().gotHit(transform.position);
             Destroy(gameObject);
         }
     }

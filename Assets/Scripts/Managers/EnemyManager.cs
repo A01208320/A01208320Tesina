@@ -48,5 +48,7 @@ public class EnemyManager : MonoBehaviour {
         }
     }
 
-
+    public Transform getSelected() {
+        return transform.GetChild(0);
+    }
 }
