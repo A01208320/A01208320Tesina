@@ -7,9 +7,9 @@ public class Enemy : MonoBehaviour {
         GetComponent<ParticleSystem>().Stop();
     }
 
-    public void gotHit() {
+    public void gotHit(Vector3 point) {
         GetComponent<ParticleSystem>().Play();
-        GameManager.instance.cam.targetPoint(transform.position, 2);
+        GameManager.instance.cam.targetPoint(point, transform.position);
         Destroy(gameObject, 2);
     }
 }

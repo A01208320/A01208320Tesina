@@ -3,25 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Rotatearoundobject : MonoBehaviour {
-    public GameObject target;
-    public float speed = 5;
+    public Transform target1, target2;
 
     public Vector3 offset;
+    public Vector3 targetPosition;
+    public float distance;
 
     void Start() {
     }
+    /*
+        void LateUpdate() {
+            targetPosition = (target2.position - target1.position).normalized;
+            transform.position = target1.position + targetPosition * -2 + offset;
+            transform.LookAt(target2);
 
-    void LateUpdate() {
-        // Look
-        //var newRotation = Quaternion.LookRotation(target.transform.position - transform.position);
-        //transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, speed * Time.deltaTime);
-        //transform.rotation = newRotation;
-        transform.rotation = Quaternion.Euler(Vector3.right * 360 + target.transform.rotation.eulerAngles);
-        //transform.rotation *= Quaternion.Euler(Vector3.down * 0);
-
-        // Move
-        Vector3 newPosition = target.transform.position - target.transform.forward * offset.z + target.transform.up * offset.y;
-        //transform.position = Vector3.Slerp(transform.position, newPosition, Time.deltaTime * speed);
-        transform.position = newPosition;
+        }
+    */
+    private void LateUpdate() {
+        targetPosition = (target2.position - target1.position).normalized;
+        transform.position = target1.position + targetPosition * distance + offset;
+        transform.LookAt(target2);
     }
 }

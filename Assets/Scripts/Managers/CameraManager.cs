@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour {
     [SerializeField] private Transform target;
-    [SerializeField] private Vector3 point;
+    [SerializeField] private Vector3 point, otherpoint;
+    [SerializeField] private bool Pointtarget;
+    [SerializeField] private float distance;
     [SerializeField] private Vector3 offset;
     [SerializeField] private float angleOffset;
     [SerializeField] private float smoothTime;
@@ -16,7 +18,7 @@ public class CameraManager : MonoBehaviour {
         none,
         cannon,
         ball,
-        circlePoint
+        endball,
     }
     [SerializeField] private typeCam type;
 
@@ -27,8 +29,14 @@ public class CameraManager : MonoBehaviour {
         velocity = Vector3.zero;
     }
 
-    IEnumerator rotate(int wait) {
-        yield return new WaitForSeconds(wait);
+    IEnumerator endTurn() {
+        yield return new WaitForSeconds(5.0f);
+        distance *= -1;
+        Vector3 t = point;
+        point = otherpoint;
+        otherpoint = t;
+        Pointtarget = true;
+        yield return new WaitForSeconds(10.0f);
         GameManager.instance.ballLanded();
     }
 
@@ -44,14 +52,19 @@ public class CameraManager : MonoBehaviour {
         this.target = target;
         offset = new Vector3(0, 1, -1);
         angleOffset = 50;
-        smoothTime = 0.2f;
+        smoothTime = 0.15f;
+        Pointtarget = false;
         type = typeCam.ball;
     }
 
-    public void targetPoint(Vector3 point, int wait) {
-        this.point = point;
-        type = typeCam.circlePoint;
-        StartCoroutine(rotate(wait));
+    public void targetPoint(Vector3 point1, Vector3 point2) {
+        point = point1;
+        otherpoint = point2;
+        offset = new Vector3(0, 1, 0);
+        distance = 2;
+        smoothTime = 0.5f;
+        type = typeCam.endball;
+        StartCoroutine(endTurn());
     }
 
     private void LateUpdate() {
@@ -62,8 +75,8 @@ public class CameraManager : MonoBehaviour {
             case typeCam.ball:
                 followBall();
                 break;
-            case typeCam.circlePoint:
-                circlePoint();
+            case typeCam.endball:
+                targetPoint();
                 break;
             default:
                 posTarget = transform.position;
@@ -84,7 +97,12 @@ public class CameraManager : MonoBehaviour {
         angleTarget = Quaternion.Euler(Vector3.right * 360 + target.rotation.eulerAngles);
     }
 
-    private void circlePoint() {
-
+    private void targetPoint() {
+        posTarget = point - (otherpoint - point).normalized * distance + offset;
+        if (Pointtarget) {
+            angleTarget = Quaternion.LookRotation(point - transform.position);
+        } else {
+            angleTarget = Quaternion.LookRotation(otherpoint - transform.position);
+        }
     }
 }
