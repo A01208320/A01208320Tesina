@@ -16,6 +16,7 @@ public class CameraManager : MonoBehaviour {
 
     public enum typeCam {
         none,
+        player,
         cannon,
         ball,
         endball,
@@ -37,21 +38,30 @@ public class CameraManager : MonoBehaviour {
         otherpoint = t;
         Pointtarget = true;
         yield return new WaitForSeconds(10.0f);
-        GameManager.instance.ballLanded();
+        //GameManager.instance.ballLanded();
+    }
+
+    public void targetPlayer() {
+        target = GameManager.instance.player.transform;
+        offset = Vector3.zero;
+        angleOffset = 0;
+        smoothTime = 0;
+        type = typeCam.player;
     }
 
     public void targetCannon() {
-        target = GameManager.instance.cannon.transform;
-        offset = new Vector3(0, 4, -3);
-        angleOffset = 30;
+        target = GameManager.instance.cannon.model;
+        offset = new Vector3(0, 3, 3);
+        angleOffset = 2;
         smoothTime = 0.3f;
         type = typeCam.cannon;
     }
 
     public void targetBall(Transform target) {
         this.target = target;
-        offset = new Vector3(0, 1, -1);
-        angleOffset = 50;
+        point = GameManager.instance.cannon.CameraPos.position;
+        offset = new Vector3(0, 0, 0);
+        angleOffset = 0;
         smoothTime = 0.15f;
         Pointtarget = false;
         type = typeCam.ball;
@@ -69,6 +79,9 @@ public class CameraManager : MonoBehaviour {
 
     private void LateUpdate() {
         switch (type) {
+            case typeCam.player:
+                followPlayer();
+                break;
             case typeCam.cannon:
                 followCannon();
                 break;
@@ -84,17 +97,31 @@ public class CameraManager : MonoBehaviour {
                 break;
         }
         transform.position = Vector3.SmoothDamp(transform.position, posTarget, ref velocity, smoothTime);
+        if (smoothTime == 0) {
+            transform.rotation = Quaternion.Lerp(transform.rotation, angleTarget, 1);
+        }
         transform.rotation = Quaternion.Lerp(transform.rotation, angleTarget, Time.deltaTime * 10);
     }
 
+    private void followPlayer() {
+        posTarget = target.position;
+        angleTarget = target.GetComponent<PlayerManager>().getRot();
+    }
+
     private void followCannon() {
-        posTarget = target.position + offset;
-        angleTarget = Quaternion.Euler(Vector3.right * angleOffset);
+        posTarget = target.position - (Quaternion.Euler(0, target.eulerAngles.y, 0) * Vector3.forward) * offset.z + Vector3.up * offset.y;
+        //angleTarget = Quaternion.Euler(Vector3.right * angleOffset);
+        angleTarget = Quaternion.LookRotation(target.position - transform.position + Vector3.up * angleOffset);
     }
 
     private void followBall() {
-        posTarget = target.position - target.forward * offset.z + target.up * offset.y;
-        angleTarget = Quaternion.Euler(Vector3.right * 360 + target.rotation.eulerAngles);
+        /*
+        Ball b = target.GetComponent<Ball>();
+        posTarget = target.position - b.forward * offset.z + b.up * offset.y;
+        angleTarget = b.rotation;
+        */
+        posTarget = point;
+        angleTarget = Quaternion.LookRotation(target.position - transform.position);
     }
 
     private void targetPoint() {
