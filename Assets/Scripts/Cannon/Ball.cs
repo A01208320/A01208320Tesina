@@ -61,7 +61,6 @@ public class Ball : MonoBehaviour {
 
             elapsed += Time.deltaTime;
         } else {
-            transform.localPosition = new Vector3(0, 0, distance);
             GameManager.instance.ui.setDP(distance.ToString());
             GameManager.instance.ballLanded();
             Destroy(this);

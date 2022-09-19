@@ -68,6 +68,8 @@ public class CannonManager : MonoBehaviour {
         bool deleteBall = Targets.getTarget().GetComponent<Target>().check(distance);
         if (deleteBall) {
             Destroy(g);
+        } else {
+            g.transform.localPosition = Targets.getTarget().localPosition;
         }
         if (Targets.checkFinished()) {
             moving.move();

@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public static class Loader {
     public enum Scene {
         DevMenu,
+        Demo,
         Cannon_Practice_Free,
         Cannon_Practice_Train,
         Cannon_Practice_Exam,
