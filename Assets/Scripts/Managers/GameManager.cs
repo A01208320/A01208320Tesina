@@ -9,40 +9,57 @@ public class GameManager : MonoBehaviour {
             Destroy(gameObject);
         } else {
             instance = this;
+            DontDestroyOnLoad(this);
         }
     }
     public enum Difficulty { none, free, practice, easy, medium, hard }
 
+    public PlayerManager player;
     public CannonManager cannon;
     public CameraManager cam;
     public UIManager ui;
-    public EnemyManager enemy;
 
     public Difficulty difficulty;
 
 
-    public void LoadScene(Loader.Scene scene) {
+    public void LoadScene(Loader.Scene scene, Difficulty diff) {
+        difficulty = diff;
         Loader.Load(scene);
     }
 
-    public void startGame() {
+    public void startCannonGame() {
+        unlockCursor();
+        player.setMove(false);
         cam.targetCannon();
-        ui.showUI(true);
-        enemy.step();
+        ui.showUI(true, false);
     }
 
-    public void cannonShoot(float V0, float av) {
-        ui.PanelValues.disableInteractable();
-        ui.showUI(false);
-        cannon.setValues(V0, av, 0);
-        cannon.moveCannon();
+    public void endCannonGame() {
+        lockCursor();
+        player.setMove(true);
+        cam.targetPlayer();
+        ui.showUI(false, true);
+    }
+
+    public void cannonShoot(Transform target) {
+        ui.showUI(false, false);
+        cam.targetBall(target);
     }
 
     public void ballLanded() {
-        enemy.step();
+        cannon.checkUI();
         cam.targetCannon();
-        ui.PanelValues.enableInteractable();
-        ui.showUI(true);
+        ui.showUI(true, false);
+    }
+
+    public void lockCursor() {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    public void unlockCursor() {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
 }

@@ -7,7 +7,6 @@ public class Button_ChangeScene : MonoBehaviour {
     [SerializeField] private GameManager.Difficulty difficulty;
 
     public void loadScene() {
-        GameManager.instance.difficulty = difficulty;
-        GameManager.instance.LoadScene(scene);
+        GameManager.instance.LoadScene(scene, difficulty);
     }
 }
