@@ -6,12 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/DevMenu.unity
-    guid: 0415544e3c04c874584470e96a757f4c
+    path: Assets/Scenes/Main_Menu.unity
+    guid: 685dd6eda2e5e524d81c996dea8b215e
   - enabled: 1
-    path: Assets/Scenes/Cannon_Practice_Free.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
-    path: Assets/Scenes/Cannon_Practice_Train.unity
-    guid: 2439da4ca22343d42b4e41bbf1e38ff8
+    path: Assets/Scenes/Demo.unity
+    guid: a1f28b4d99d731f4b8287fda0753bcde
   m_configObjects: {}
