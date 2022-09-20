@@ -23,10 +23,12 @@ public class UIManager : MonoBehaviour {
     private float complex;
     private bool finished = false;
     private bool multipleTargets;
+    [SerializeField] public GameObject mouseicon;
 
 
     private void Awake() {
         GameManager.instance.ui = this;
+        mouseicon.SetActive(false);
     }
 
     public void init(float complex, bool fixed1, string value1, float min_limit1, float max_limit1, bool fixed2, string value2, float min_limit2, float max_limit2, string gravity, int numTargets, string targetDistance) {
@@ -131,4 +133,9 @@ public class UIManager : MonoBehaviour {
             Button_prevTarget.interactable = set;
         }
     }
+
+    public void setmouseactive(bool set) {
+        mouseicon.SetActive(set);
+    }
+
 }

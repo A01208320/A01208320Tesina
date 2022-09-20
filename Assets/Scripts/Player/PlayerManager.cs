@@ -46,13 +46,15 @@ public class PlayerManager : MonoBehaviour {
     }
 
     private void detectInteractable() {
-        if (!interact) {
-            return;
-        }
         RaycastHit hit;
         Ray ray = GameManager.instance.cam.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit, 3.0f, buttonlayer)) {
-            hit.transform.GetComponent<ButtonStartCannon>().startCannon();
+            GameManager.instance.ui.setmouseactive(true);
+            if (interact) {
+                hit.transform.GetComponent<ButtonStartCannon>().startCannon();
+            }
+        } else {
+            GameManager.instance.ui.setmouseactive(false);
         }
     }
 
