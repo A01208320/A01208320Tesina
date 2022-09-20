@@ -55,7 +55,7 @@ public class CannonManager : MonoBehaviour {
         bool finished = Targets.checkFinished();
         if (finished) {
             button.gameObject.layer = LayerMask.NameToLayer("Default");
-            Destroy(button);
+            button.Destroy();
             Destroy(CameraPos.gameObject);
             Destroy(Targets.gameObject);
             Destroy(this);

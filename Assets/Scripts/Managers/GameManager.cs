@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour {
         unlockCursor();
         player.setMove(false);
         cam.targetCannon();
+        ui.setmouseactive(false);
         ui.showUI(true, false);
     }
 
