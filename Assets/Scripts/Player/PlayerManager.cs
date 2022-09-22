@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour {
     private Rigidbody rb;
+    [SerializeField] public Transform cameraPos;
     [SerializeField] private Vector3 input, mouse;
     [SerializeField] private float movementSpeed;
     [SerializeField] private float sensX, sensY;
@@ -49,9 +50,11 @@ public class PlayerManager : MonoBehaviour {
         RaycastHit hit;
         Ray ray = GameManager.instance.cam.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit, 3.0f, buttonlayer)) {
-            GameManager.instance.ui.setmouseactive(true);
-            if (interact) {
-                hit.transform.GetComponent<ButtonStartCannon>().startCannon();
+            if (hit.transform.parent.GetComponent<ButtonStartCannon>() != null) {
+                GameManager.instance.ui.setmouseactive(true);
+                if (interact) {
+                    hit.transform.parent.GetComponent<ButtonStartCannon>().startCannon();
+                }
             }
         } else {
             GameManager.instance.ui.setmouseactive(false);

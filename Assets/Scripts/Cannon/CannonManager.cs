@@ -55,7 +55,7 @@ public class CannonManager : MonoBehaviour {
         bool finished = Targets.checkFinished();
         if (finished) {
             button.gameObject.layer = LayerMask.NameToLayer("Default");
-            button.Destroy();
+            Destroy(button);
             Destroy(CameraPos.gameObject);
             Destroy(Targets.gameObject);
             Destroy(this);
@@ -94,7 +94,7 @@ public class CannonManager : MonoBehaviour {
         // Move cannon orientation
         if (movingCannon) {
             count += Time.deltaTime / timer;
-            model.rotation = Quaternion.Slerp(model.rotation, Quaternion.Euler(-aV, aH, 0), count);
+            model.localRotation = Quaternion.Slerp(model.localRotation, Quaternion.Euler(-aV, aH, 0), count);
             if (1.2f <= count) {
                 movingCannon = false;
                 if (shootCannon) {

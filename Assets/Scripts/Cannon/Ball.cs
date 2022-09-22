@@ -75,6 +75,6 @@ public class Ball : MonoBehaviour {
 
     public void startMoving() {
         ableMove = true;
-        transform.rotation = Quaternion.Euler(0, angleH, 0);
+        transform.localRotation = Quaternion.Euler(0, angleH, 0);
     }
 }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Target
+  - MAST_Holder
   layers:
   - Default
   - TransparentFX
