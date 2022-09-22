@@ -3,16 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ButtonStartCannon : MonoBehaviour {
+    private Animator anim;
     private void Start() {
-        GetComponent<Renderer>().material.color = Color.yellow;
+        anim = GetComponent<Animator>();
     }
 
     public void startCannon() {
-        GetComponent<Renderer>().material.color = Color.green;
+        anim.SetTrigger("Activate");
         transform.parent.GetComponent<CannonManager>().init();
-    }
-
-    public void Destroy() {
-        GetComponent<Renderer>().material.color = Color.gray;
     }
 }

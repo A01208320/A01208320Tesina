@@ -42,7 +42,7 @@ public class CameraManager : MonoBehaviour {
     }
 
     public void targetPlayer() {
-        target = GameManager.instance.player.transform;
+        target = GameManager.instance.player.cameraPos;
         offset = Vector3.zero;
         angleOffset = 0;
         smoothTime = 0;
@@ -51,8 +51,8 @@ public class CameraManager : MonoBehaviour {
 
     public void targetCannon() {
         target = GameManager.instance.cannon.model;
-        offset = new Vector3(0, 3, 3);
-        angleOffset = 2;
+        offset = new Vector3(0, 2, 2);
+        angleOffset = 1;
         smoothTime = 0.3f;
         type = typeCam.cannon;
     }
@@ -105,7 +105,7 @@ public class CameraManager : MonoBehaviour {
 
     private void followPlayer() {
         posTarget = target.position;
-        angleTarget = target.GetComponent<PlayerManager>().getRot();
+        angleTarget = target.parent.GetComponent<PlayerManager>().getRot();
     }
 
     private void followCannon() {

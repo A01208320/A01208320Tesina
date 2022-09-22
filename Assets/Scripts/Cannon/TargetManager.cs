@@ -37,10 +37,10 @@ public class TargetManager : MonoBehaviour {
         return transform.GetChild(index).transform;
     }
     public float getAngle() {
-        return Quaternion.LookRotation(transform.GetChild(index).position - transform.position).eulerAngles.y;
+        return Quaternion.LookRotation(transform.GetChild(index).localPosition - transform.localPosition).eulerAngles.y;
     }
     public float getDistance() {
-        return Vector3.Distance(transform.position, transform.GetChild(index).position);
+        return Vector3.Distance(transform.localPosition, transform.GetChild(index).localPosition);
     }
 
 }
