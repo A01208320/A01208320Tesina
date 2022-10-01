@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 2561397434708547207}
   - component: {fileID: 6330628009654133252}
   - component: {fileID: 4949074127457485006}
-  m_Layer: 0
+  - component: {fileID: 8337726371628224218}
+  m_Layer: 7
   m_Name: object1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,9 +94,26 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 6613730245357839514}
+--- !u!114 &8337726371628224218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101059884464092438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: 5e63efbd3da8bb245bec22f344a68642, type: 2}
+  isGlobal: 1
+  blendDistance: 0
+  weight: 1
+  priority: 0
 --- !u!1 &674905776418052678
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,7 +224,8 @@ GameObject:
   - component: {fileID: 5415673507208654114}
   - component: {fileID: 2049874425915746818}
   - component: {fileID: 8596977183629392261}
-  m_Layer: 0
+  - component: {fileID: 8549616847743117931}
+  m_Layer: 7
   m_Name: object4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -287,9 +306,26 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 6323336349280028358}
+--- !u!114 &8549616847743117931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1853133782456105824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: 5e63efbd3da8bb245bec22f344a68642, type: 2}
+  isGlobal: 1
+  blendDistance: 0
+  weight: 1
+  priority: 0
 --- !u!1 &2156988347335637921
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,7 +338,8 @@ GameObject:
   - component: {fileID: 6783186755704264188}
   - component: {fileID: 335419242654276390}
   - component: {fileID: 7068143994275476168}
-  m_Layer: 0
+  - component: {fileID: 7303422734378710445}
+  m_Layer: 7
   m_Name: object5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -383,9 +420,26 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -4024296633272491386}
+--- !u!114 &7303422734378710445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2156988347335637921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: 5e63efbd3da8bb245bec22f344a68642, type: 2}
+  isGlobal: 1
+  blendDistance: 0
+  weight: 1
+  priority: 0
 --- !u!1 &2399599452490478962
 GameObject:
   m_ObjectHideFlags: 0
@@ -531,7 +585,8 @@ GameObject:
   - component: {fileID: 8334389013450182502}
   - component: {fileID: 1407688278662047353}
   - component: {fileID: 4765731829537654276}
-  m_Layer: 0
+  - component: {fileID: 1569045384161795006}
+  m_Layer: 7
   m_Name: object2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -612,9 +667,26 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 2809251028295110341}
+--- !u!114 &1569045384161795006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9132874620060760823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: 5e63efbd3da8bb245bec22f344a68642, type: 2}
+  isGlobal: 1
+  blendDistance: 0
+  weight: 1
+  priority: 0
 --- !u!43 &-4024296633272491386
 Mesh:
   m_ObjectHideFlags: 0

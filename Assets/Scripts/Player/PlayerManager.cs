@@ -20,8 +20,7 @@ public class PlayerManager : MonoBehaviour {
     private void Start() {
         rb = GetComponent<Rigidbody>();
         GameManager.instance.cam.targetPlayer();
-        GameManager.instance.lockCursor();
-        ablemove = true;
+        GameManager.instance.unlockPlayer();
     }
 
     private void Update() {

@@ -86,6 +86,7 @@ public class UIManager : MonoBehaviour {
     }
 
     public void ButtonPressed() {
+        Button_Shoot.interactable = false;
         float input1, input2;
         if (complex == 0) {
             float.TryParse(Input_V0.text, out input1);
@@ -107,9 +108,8 @@ public class UIManager : MonoBehaviour {
         GameManager.instance.cannon.exit();
     }
 
-    public void checkUI(bool finished, bool multipleTargets) {
+    public void checkUI(bool finished) {
         this.finished = finished;
-        this.multipleTargets = multipleTargets;
     }
 
     private void activeInteractables(bool set) {
@@ -132,6 +132,14 @@ public class UIManager : MonoBehaviour {
             Button_nextTarget.interactable = set;
             Button_prevTarget.interactable = set;
         }
+    }
+    public void ableShoot(bool completed) {
+        if (finished || completed) {
+            Button_Shoot.interactable = false;
+        } else {
+            Button_Shoot.interactable = true;
+        }
+
     }
 
     public void setmouseactive(bool set) {

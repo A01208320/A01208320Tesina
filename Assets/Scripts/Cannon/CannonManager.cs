@@ -6,15 +6,16 @@ public class CannonManager : MonoBehaviour {
     [Header("Cannon values")]
     [SerializeField] public Transform model;
     [SerializeField] public ButtonStartCannon button;
+    [SerializeField] private int cannonNumber;
     [SerializeField] private float V0;
     [SerializeField] private float aV;
     [SerializeField] private float aH;
+    [SerializeField] private float Vx;
+    [SerializeField] private float Vy;
     [Header("Projectile")]
-    [SerializeField] private GameObject ball;
-    [SerializeField] private TargetManager Targets;
+    [SerializeField] private GameObject ballPrefab;
+    [SerializeField] public TargetManager Targets;
     [SerializeField] public Transform CameraPos;
-    [Header("Moving Object")]
-    [SerializeField] private ClearObstacle moving;
     [Header("Calculated")]
     [SerializeField] public float distance;
     [Header("Adjust difficulty")]
@@ -28,13 +29,7 @@ public class CannonManager : MonoBehaviour {
     [SerializeField] private float value_SecondParam;
     [SerializeField] private float min_SecondParam;
     [SerializeField] private float max_SecondParam;
-    private float timer, count;
-    private bool movingCannon, shootCannon;
-    private GameObject g;
-
-    private void Start() {
-        movingCannon = false;
-    }
+    private GameObject ball;
 
     public void init() {
         // Announce the GameManager the existance
@@ -45,7 +40,7 @@ public class CannonManager : MonoBehaviour {
 
         // Start the cannon minigame
         aH = Targets.getAngle();
-        moveCannon(false);
+        StartCoroutine(moveCannon(false));
         GameManager.instance.startCannonGame();
     }
 
@@ -57,7 +52,7 @@ public class CannonManager : MonoBehaviour {
             button.gameObject.layer = LayerMask.NameToLayer("Default");
             Destroy(button);
             Destroy(CameraPos.gameObject);
-            Destroy(Targets.gameObject);
+            Destroy(Targets);
             Destroy(this);
         }
 
@@ -67,64 +62,75 @@ public class CannonManager : MonoBehaviour {
     public void checkUI() {
         bool deleteBall = Targets.getTarget().GetComponent<Target>().check(distance);
         if (deleteBall) {
-            Destroy(g);
-        } else {
-            g.transform.localPosition = Targets.getTarget().localPosition;
+            Destroy(ball);
         }
+
         if (Targets.checkFinished()) {
-            moving.move();
+            GameManager.instance.progression.activate(cannonNumber);
         }
-        GameManager.instance.ui.checkUI(Targets.checkFinished(), 1 < Targets.numTargets());
+        GameManager.instance.ui.checkUI(Targets.checkFinished());
     }
 
     public void nextTarget() {
         Targets.nextTarget();
         aH = Targets.getAngle();
         GameManager.instance.ui.setDT(Targets.getDistance().ToString());
-        moveCannon(false);
+        GameManager.instance.ui.ableShoot(Targets.isCompleted());
+        GameManager.instance.cam.targetCannon(Targets.getTarget().position);
+        StartCoroutine(moveCannon(false));
     }
     public void prevTarget() {
         Targets.prevTarget();
         aH = Targets.getAngle();
         GameManager.instance.ui.setDT(Targets.getDistance().ToString());
-        moveCannon(false);
+        GameManager.instance.ui.ableShoot(Targets.isCompleted());
+        GameManager.instance.cam.targetCannon(Targets.getTarget().position);
+        StartCoroutine(moveCannon(false));
     }
 
-    private void Update() {
-        // Move cannon orientation
-        if (movingCannon) {
-            count += Time.deltaTime / timer;
-            model.localRotation = Quaternion.Slerp(model.localRotation, Quaternion.Euler(-aV, aH, 0), count);
-            if (1.2f <= count) {
-                movingCannon = false;
-                if (shootCannon) {
-                    shootCannon = false;
-                    distance = V0 * V0 * (Mathf.Sin(2 * aV * Mathf.Deg2Rad)) / gravity;
-                    Fire();
+    private IEnumerator moveCannon(bool shot) {
+        if (shot) {
+        }
+        Quaternion starting = model.localRotation;
+        Quaternion target = Quaternion.Euler(-aV, aH, 0);
+
+        float elapsed = 0;
+        float time = 1;
+        while (elapsed < time) {
+            model.localRotation = Quaternion.Slerp(starting, target, elapsed / time);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        if (shot) {
+            distance = V0 * V0 * (Mathf.Sin(2 * aV * Mathf.Deg2Rad)) / gravity;
+            ball = Instantiate(ballPrefab, transform.position, transform.rotation, transform);
+            GameManager.instance.cannonShoot(ball.transform);
+            yield return new WaitForSeconds(1);
+            Fire();
+        }
+    }
+
+    /*
+        private void Update() {
+            if (movingCannon) {
+                count += Time.deltaTime / timer;
+                model.localRotation = Quaternion.Slerp(model.localRotation, Quaternion.Euler(-aV, aH, 0), count);
+                if (1.2f <= count) {
+                    movingCannon = false;
+                    if (shootCannon) {
+                        shootCannon = false;
+                        distance = V0 * V0 * (Mathf.Sin(2 * aV * Mathf.Deg2Rad)) / gravity;
+                        Fire();
+                    }
                 }
             }
         }
-    }
+    */
 
     public void Fire() {
-        if (complex == 0) {
-            g.GetComponent<Ball>().init(complex, V0, aV, gravity, distance, aH);
-        } else {
-            g.GetComponent<Ball>().init(complex, 0, 0, gravity, distance, aH);
-        }
-        g.GetComponent<Ball>().startMoving();
-    }
-
-    public void moveCannon(bool shoot) {
-        movingCannon = true;
-        timer = 1;
-        count = 0;
-
-        shootCannon = shoot;
-        if (shootCannon) {
-            g = Instantiate(ball, transform.position, transform.rotation, transform);
-            GameManager.instance.cannonShoot(g.transform);
-        }
+        ball.GetComponent<Ball>().init(V0, Vx, Vy, aV, gravity, distance, aH);
+        ball.GetComponent<Ball>().startMoving();
     }
 
     public void setValues(float param1, float param2) {
@@ -140,12 +146,31 @@ public class CannonManager : MonoBehaviour {
             } else {
                 aV = value_SecondParam;
             }
+            calcComponents();
         } else {
             if (!fixed_FirstParam) {
-                //TODO
+                Vx = param1;
+            } else {
+                Vx = value_FirstParam;
             }
+
+            if (!fixed_SecondParam) {
+                Vy = param2;
+            } else {
+                Vy = value_SecondParam;
+            }
+            calcDirection();
         }
 
-        moveCannon(true);
+        StartCoroutine(moveCannon(true));
+    }
+
+    private void calcDirection() {
+        V0 = Vector2.Distance(new Vector2(Vx, Vy), Vector2.zero);
+        aV = Mathf.Atan2(Vy, 0) * Mathf.Rad2Deg;
+    }
+    private void calcComponents() {
+        Vx = V0 * Mathf.Cos(aV * Mathf.Deg2Rad);
+        Vy = V0 * Mathf.Sin(aV * Mathf.Deg2Rad);
     }
 }

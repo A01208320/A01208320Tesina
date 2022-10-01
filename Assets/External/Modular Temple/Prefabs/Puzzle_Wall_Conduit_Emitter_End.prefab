@@ -143,7 +143,8 @@ GameObject:
   - component: {fileID: 7687658695614036902}
   - component: {fileID: 7333109591342606786}
   - component: {fileID: 5242303884393737326}
-  m_Layer: 0
+  - component: {fileID: 4072665535671539033}
+  m_Layer: 7
   m_Name: object1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -224,9 +225,26 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -4059063978087715732}
+--- !u!114 &4072665535671539033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610599975960858180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: 5e63efbd3da8bb245bec22f344a68642, type: 2}
+  isGlobal: 1
+  blendDistance: 0
+  weight: 1
+  priority: 0
 --- !u!1 &5256507380415284255
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,7 +355,8 @@ GameObject:
   - component: {fileID: 7217525604010150452}
   - component: {fileID: 5070260577675802024}
   - component: {fileID: 7053123103269438069}
-  m_Layer: 0
+  - component: {fileID: 1912294950393177876}
+  m_Layer: 7
   m_Name: object3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -418,9 +437,26 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 6140649049468029087}
+--- !u!114 &1912294950393177876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5636871015200373147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: 5e63efbd3da8bb245bec22f344a68642, type: 2}
+  isGlobal: 1
+  blendDistance: 0
+  weight: 1
+  priority: 0
 --- !u!43 &-4922636884745951472
 Mesh:
   m_ObjectHideFlags: 0

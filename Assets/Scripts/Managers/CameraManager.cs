@@ -49,9 +49,10 @@ public class CameraManager : MonoBehaviour {
         type = typeCam.player;
     }
 
-    public void targetCannon() {
+    public void targetCannon(Vector3 point) {
         target = GameManager.instance.cannon.model;
-        offset = new Vector3(0, 2, 2);
+        this.point = point;
+        offset = new Vector3(0, 1, 1);
         angleOffset = 1;
         smoothTime = 0.3f;
         type = typeCam.cannon;
@@ -111,7 +112,7 @@ public class CameraManager : MonoBehaviour {
     private void followCannon() {
         posTarget = target.position - (Quaternion.Euler(0, target.eulerAngles.y, 0) * Vector3.forward) * offset.z + Vector3.up * offset.y;
         //angleTarget = Quaternion.Euler(Vector3.right * angleOffset);
-        angleTarget = Quaternion.LookRotation(target.position - transform.position + Vector3.up * angleOffset);
+        angleTarget = Quaternion.LookRotation(point);
     }
 
     private void followBall() {

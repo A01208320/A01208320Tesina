@@ -10,6 +10,12 @@ public class ButtonStartCannon : MonoBehaviour {
 
     public void startCannon() {
         anim.SetTrigger("Activate");
+        StartCoroutine(activate());
+    }
+
+    private IEnumerator activate() {
+        GameManager.instance.lockPlayer();
+        yield return new WaitForSeconds(1);
         transform.parent.GetComponent<CannonManager>().init();
     }
 }
