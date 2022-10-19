@@ -13,15 +13,24 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    [Header("Managers")]
     public PlayerManager player;
     public CannonManager cannon;
     public CameraManager cam;
     public UIManager ui;
     public ProgressionManager progression;
+    [Header("Sound Assets")]
+    [SerializeField] public AudioClip CannonSound;
+    [SerializeField] public AudioClip BallCorrect;
+    [SerializeField] public AudioClip BallIncorrect;
 
 
     public void LoadScene(Loader.Scene scene) {
         Loader.Load(scene);
+    }
+
+    public void playSound(SoundManager.Sound sound) {
+        SoundManager.PlaySound(sound);
     }
 
     public void startCannonGame() {

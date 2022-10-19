@@ -37,8 +37,6 @@ public class Ball : MonoBehaviour {
     private IEnumerator move() {
         elapsed = 0;
         while (elapsed < duration) {
-            //Vector3 newPos = new Vector3(0, (Vy - (gravity * elapsed)) * Time.deltaTime, Vx * Time.deltaTime);
-            //transform.Translate(newPos);
             float x = Vx * elapsed;
             float y = (Vy * elapsed) - (0.5f * gravity * elapsed * elapsed);
             newPos = new Vector3(0, y, x);
@@ -46,15 +44,9 @@ public class Ball : MonoBehaviour {
 
             Vector2 PosGround = new Vector2(transform.localPosition.x, transform.localPosition.z);
             float dis = Vector2.Distance(Vector2.zero, PosGround);
-            /*
-            if (distance <= dis) {
-                elapsed = duration;
-                dis = distance;
-            }
-            */
             GameManager.instance.ui.setDP(dis.ToString());
 
-            elapsed += Time.deltaTime / 10;
+            elapsed += Time.deltaTime;
             yield return null;
         }
         transform.localPosition = transform.localRotation * new Vector3(0, 0, distance);
@@ -67,5 +59,10 @@ public class Ball : MonoBehaviour {
     public void startMoving() {
         transform.localRotation = Quaternion.Euler(0, angleH, 0);
         StartCoroutine(move());
+    }
+
+    private void OnCollisionEnter(Collision other) {
+        StopCoroutine(move());
+        GameManager.instance.ballLanded();
     }
 }

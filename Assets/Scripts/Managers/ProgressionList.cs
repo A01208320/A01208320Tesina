@@ -15,8 +15,8 @@ public class SerializableRenderer {
     public List<Renderer> Renderers;
 }
 [System.Serializable]
-public class SerializableColor {
-    public List<Color> Colors;
+public class SerializableMaterial {
+    public List<Material> Materials;
 }
 
 [System.Serializable]
@@ -32,6 +32,6 @@ public class RendererList {
     public List<SerializableRenderer> RendererLists;
 }
 [System.Serializable]
-public class ColorList {
-    public List<SerializableColor> ColorLists;
+public class MaterialList {
+    public List<SerializableMaterial> MaterialLists;
 }

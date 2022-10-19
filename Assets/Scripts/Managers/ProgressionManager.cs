@@ -6,7 +6,7 @@ public class ProgressionManager : MonoBehaviour {
     [SerializeField] private TransformList moveObjects;
     [SerializeField] private Vector3List posObjects;
     [SerializeField] private RendererList recolorObjects;
-    [SerializeField] private ColorList colorObjects;
+    [SerializeField] private MaterialList colorObjects;
 
     private void Awake() {
         GameManager.instance.progression = this;
@@ -23,9 +23,9 @@ public class ProgressionManager : MonoBehaviour {
 
         if (0 < recolorObjects.RendererLists.Count) {
             List<Renderer> renderers = recolorObjects.RendererLists[i].Renderers;
-            List<Color> colors = colorObjects.ColorLists[i].Colors;
+            List<Material> materials = colorObjects.MaterialLists[i].Materials;
             for (int a = 0; a < renderers.Count; a++) {
-                renderers[a].material.SetColor("_EmissionColor", colors[a]);
+                renderers[a].material = materials[a];
             }
         }
     }

@@ -6,7 +6,6 @@ public class CannonManager : MonoBehaviour {
     [Header("Cannon values")]
     [SerializeField] public Transform model;
     [SerializeField] public ButtonStartCannon button;
-    [SerializeField] private int cannonNumber;
     [SerializeField] private float V0;
     [SerializeField] private float aV;
     [SerializeField] private float aH;
@@ -16,16 +15,22 @@ public class CannonManager : MonoBehaviour {
     [SerializeField] private GameObject ballPrefab;
     [SerializeField] public TargetManager Targets;
     [SerializeField] public Transform CameraPos;
+    [SerializeField] private ActivateObjects act;
     [Header("Calculated")]
     [SerializeField] public float distance;
     [Header("Adjust difficulty")]
     [SerializeField][Range(0, 1)] private int complex;
+    [SerializeField] private bool random_gravity;
     [SerializeField] private float gravity;
+    [SerializeField] private float min_gravity;
+    [SerializeField] private float max_gravity;
     [SerializeField] private bool fixed_FirstParam;
+    [SerializeField] private bool random_FirstParam;
     [SerializeField] private float value_FirstParam;
     [SerializeField] private float min_FirstParam;
     [SerializeField] private float max_FirstParam;
     [SerializeField] private bool fixed_SecondParam;
+    [SerializeField] private bool random_SecondParam;
     [SerializeField] private float value_SecondParam;
     [SerializeField] private float min_SecondParam;
     [SerializeField] private float max_SecondParam;
@@ -35,8 +40,11 @@ public class CannonManager : MonoBehaviour {
         // Announce the GameManager the existance
         GameManager.instance.cannon = this;
 
+        // Calc random params
+        randValues();
+
         // Give values to UI
-        GameManager.instance.ui.init(complex, fixed_FirstParam, value_FirstParam.ToString(), min_FirstParam, max_FirstParam, fixed_SecondParam, value_SecondParam.ToString(), min_SecondParam, max_SecondParam, gravity.ToString(), Targets.numTargets(), Targets.getDistance().ToString());
+        //GameManager.instance.ui.init(complex, fixed_FirstParam, value_FirstParam.ToString(), fixed_SecondParam, value_SecondParam.ToString(), gravity.ToString(), Targets.numTargets(), Targets.getDistance().ToString());
 
         // Start the cannon minigame
         aH = Targets.getAngle();
@@ -66,23 +74,39 @@ public class CannonManager : MonoBehaviour {
         }
 
         if (Targets.checkFinished()) {
-            GameManager.instance.progression.activate(cannonNumber);
+            act.activate();
         }
         GameManager.instance.ui.checkUI(Targets.checkFinished());
     }
 
+    private void randValues() {
+        if (random_gravity) {
+            gravity = Random.Range(min_gravity, max_gravity);
+        }
+        if (fixed_FirstParam && random_FirstParam) {
+            value_FirstParam = Random.Range(min_FirstParam, max_FirstParam);
+        }
+        if (fixed_SecondParam && random_SecondParam) {
+            value_SecondParam = Random.Range(min_SecondParam, max_SecondParam);
+        }
+
+        GameManager.instance.ui.init(complex, fixed_FirstParam, value_FirstParam.ToString(), fixed_SecondParam, value_SecondParam.ToString(), gravity.ToString(), Targets.numTargets(), Targets.getDistance().ToString());
+    }
+
     public void nextTarget() {
         Targets.nextTarget();
-        aH = Targets.getAngle();
-        GameManager.instance.ui.setDT(Targets.getDistance().ToString());
-        GameManager.instance.ui.ableShoot(Targets.isCompleted());
-        GameManager.instance.cam.targetCannon(Targets.getTarget().position);
-        StartCoroutine(moveCannon(false));
+        prepTarget();
     }
     public void prevTarget() {
         Targets.prevTarget();
+        prepTarget();
+    }
+
+    private void prepTarget() {
         aH = Targets.getAngle();
-        GameManager.instance.ui.setDT(Targets.getDistance().ToString());
+        randValues();
+        //GameManager.instance.ui.setDT(Targets.getDistance().ToString());
+        GameManager.instance.ui.adjustValues(complex, Targets.getDistance().ToString(), gravity.ToString(), value_FirstParam.ToString(), value_SecondParam.ToString());
         GameManager.instance.ui.ableShoot(Targets.isCompleted());
         GameManager.instance.cam.targetCannon(Targets.getTarget().position);
         StartCoroutine(moveCannon(false));
@@ -110,23 +134,6 @@ public class CannonManager : MonoBehaviour {
             Fire();
         }
     }
-
-    /*
-        private void Update() {
-            if (movingCannon) {
-                count += Time.deltaTime / timer;
-                model.localRotation = Quaternion.Slerp(model.localRotation, Quaternion.Euler(-aV, aH, 0), count);
-                if (1.2f <= count) {
-                    movingCannon = false;
-                    if (shootCannon) {
-                        shootCannon = false;
-                        distance = V0 * V0 * (Mathf.Sin(2 * aV * Mathf.Deg2Rad)) / gravity;
-                        Fire();
-                    }
-                }
-            }
-        }
-    */
 
     public void Fire() {
         ball.GetComponent<Ball>().init(V0, Vx, Vy, aV, gravity, distance, aH);
