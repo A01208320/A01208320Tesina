@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class Button_ChangeScene : MonoBehaviour {
     [SerializeField] private Loader.Scene scene;
-    [SerializeField] private GameManager.Difficulty difficulty;
 
     public void loadScene() {
-        GameManager.instance.LoadScene(scene, difficulty);
+        if (scene.ToString() == "Exit") {
+            Application.Quit();
+        }
+        GameManager.instance.playSound(GameManager.Sound.UI);
+        GameManager.instance.LoadScene(scene);
     }
 }

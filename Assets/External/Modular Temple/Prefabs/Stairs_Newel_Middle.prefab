@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2554607218681564659
+--- !u!1 &4635732056752692111
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,10 +8,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6563138792008845366}
-  - component: {fileID: 7549490054483092362}
-  - component: {fileID: 6393114471024972580}
-  - component: {fileID: 8986780388076145225}
+  - component: {fileID: 3207427429028895772}
+  - component: {fileID: 3300894421007055145}
+  - component: {fileID: 1807262717355637919}
+  - component: {fileID: 8024898709588688616}
   m_Layer: 0
   m_Name: object1
   m_TagString: Untagged
@@ -19,35 +19,35 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6563138792008845366
+--- !u!4 &3207427429028895772
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2554607218681564659}
+  m_GameObject: {fileID: 4635732056752692111}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 9076039789030720525}
+  m_Father: {fileID: 7407236499114323506}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &7549490054483092362
+--- !u!33 &3300894421007055145
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2554607218681564659}
-  m_Mesh: {fileID: -4376578840071428749}
---- !u!23 &6393114471024972580
+  m_GameObject: {fileID: 4635732056752692111}
+  m_Mesh: {fileID: 3591415112576743276}
+--- !u!23 &1807262717355637919
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2554607218681564659}
+  m_GameObject: {fileID: 4635732056752692111}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4ba21555e037e1c41ac60de73475c5ef, type: 2}
+  - {fileID: 2100000, guid: 665fb574398d61e45a78d5cfbbcf8574, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -82,21 +82,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &8986780388076145225
+--- !u!64 &8024898709588688616
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2554607218681564659}
+  m_GameObject: {fileID: 4635732056752692111}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: -4376578840071428749}
---- !u!1 &8513980797674427229
+  m_Mesh: {fileID: 3591415112576743276}
+--- !u!1 &6074144710963555814
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 9076039789030720525}
+  - component: {fileID: 7407236499114323506}
   m_Layer: 0
   m_Name: Stairs_Newel_Middle
   m_TagString: Untagged
@@ -112,22 +112,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &9076039789030720525
+--- !u!4 &7407236499114323506
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8513980797674427229}
+  m_GameObject: {fileID: 6074144710963555814}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 6563138792008845366}
+  - {fileID: 3207427429028895772}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!43 &-4376578840071428749
+--- !u!43 &3591415112576743276
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

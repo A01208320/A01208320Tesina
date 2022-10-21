@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1323473646223669065
+--- !u!1 &4960129023594200276
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,10 +8,41 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 9169812504484619348}
-  - component: {fileID: 7457754874070486482}
-  - component: {fileID: 8675214653288876447}
-  - component: {fileID: 1317971367735363135}
+  - component: {fileID: 7099967154861359894}
+  m_Layer: 0
+  m_Name: Tower_Parapet_Braced_Crowned
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7099967154861359894
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4960129023594200276}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 781209666632049458}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &9013180229329937792
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 781209666632049458}
+  - component: {fileID: 6235502657361084181}
+  - component: {fileID: 699321393446658797}
+  - component: {fileID: 4108680026291002581}
   m_Layer: 0
   m_Name: object1
   m_TagString: Untagged
@@ -19,35 +50,35 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &9169812504484619348
+--- !u!4 &781209666632049458
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1323473646223669065}
+  m_GameObject: {fileID: 9013180229329937792}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 5263515790924305754}
+  m_Father: {fileID: 7099967154861359894}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &7457754874070486482
+--- !u!33 &6235502657361084181
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1323473646223669065}
-  m_Mesh: {fileID: -8583800604896134256}
---- !u!23 &8675214653288876447
+  m_GameObject: {fileID: 9013180229329937792}
+  m_Mesh: {fileID: 2804619149415874582}
+--- !u!23 &699321393446658797
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1323473646223669065}
+  m_GameObject: {fileID: 9013180229329937792}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -60,10 +91,10 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 486b27e0b1fcd7f45b06f2a27f6e0c73, type: 2}
-  - {fileID: 2100000, guid: 22296dd75b848dd498427db5324b9bb4, type: 2}
-  - {fileID: 2100000, guid: 9cd732b0773a19443bd5778f273d0146, type: 2}
-  - {fileID: 2100000, guid: 9b585d584e1a8a447868a6206ec26c4a, type: 2}
+  - {fileID: 2100000, guid: 93c895452898d524180811a180afeb2a, type: 2}
+  - {fileID: 2100000, guid: 960f9a9048c158645a9f4e301663e1e9, type: 2}
+  - {fileID: 2100000, guid: 9d6b4c99bfcfe5643b9228323ba34afe, type: 2}
+  - {fileID: 2100000, guid: 298805c8f797a6c449957c56bad8187f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -85,52 +116,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &1317971367735363135
+--- !u!64 &4108680026291002581
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1323473646223669065}
+  m_GameObject: {fileID: 9013180229329937792}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: -8583800604896134256}
---- !u!1 &2470639845074337400
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5263515790924305754}
-  m_Layer: 0
-  m_Name: Tower_Parapet_Braced_Crowned
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5263515790924305754
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2470639845074337400}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 9169812504484619348}
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!43 &-8583800604896134256
+  m_Mesh: {fileID: 2804619149415874582}
+--- !u!43 &2804619149415874582
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -31,7 +31,7 @@ public class UIManager : MonoBehaviour {
         mouseicon.SetActive(false);
     }
 
-    public void init(float complex, bool fixed1, string value1, float min_limit1, float max_limit1, bool fixed2, string value2, float min_limit2, float max_limit2, string gravity, int numTargets, string targetDistance) {
+    public void init(float complex, bool fixed1, string value1, bool fixed2, string value2, string gravity, int numTargets, string targetDistance) {
         this.complex = complex;
         Text_G.text = gravity;
         Text_DT.text = targetDistance;
@@ -45,7 +45,6 @@ public class UIManager : MonoBehaviour {
                 } else {
                     Text_V0.gameObject.SetActive(false);
                     Input_V0.gameObject.SetActive(true);
-                    Input_V0.GetComponent<Text_Validation>().setLimits(min_limit1, max_limit1);
                 }
 
                 // Prepare a
@@ -56,7 +55,6 @@ public class UIManager : MonoBehaviour {
                 } else {
                     Text_a.gameObject.SetActive(false);
                     Input_a.gameObject.SetActive(true);
-                    Input_a.GetComponent<Text_Validation>().setLimits(min_limit2, max_limit2);
                 }
                 break;
             case 1: // Hard Vx, Vy
@@ -69,6 +67,29 @@ public class UIManager : MonoBehaviour {
             multipleTargets = true;
         }
         finished = false;
+    }
+
+    public void adjustValues(int complex, string distanceTarget, string gravity, string firstParam, string secondParam) {
+        Text_DT.text = distanceTarget;
+        Text_G.text = gravity;
+
+        if (complex == 0) {
+            if (Text_V0.IsActive()) {
+                Text_V0.text = firstParam;
+            }
+
+            if (Text_a.IsActive()) {
+                Text_a.text = secondParam;
+            }
+        } else {
+            if (Text_Vx.IsActive()) {
+                Text_Vx.text = firstParam;
+            }
+
+            if (Text_Vy.IsActive()) {
+                Text_Vy.text = secondParam;
+            }
+        }
     }
 
     public void setDT(string text) {
@@ -86,6 +107,7 @@ public class UIManager : MonoBehaviour {
     }
 
     public void ButtonPressed() {
+        Button_Shoot.interactable = false;
         float input1, input2;
         if (complex == 0) {
             float.TryParse(Input_V0.text, out input1);
@@ -94,22 +116,25 @@ public class UIManager : MonoBehaviour {
             float.TryParse(Input_Vx.text, out input1);
             float.TryParse(Input_Vy.text, out input2);
         }
+        GameManager.instance.playSound(GameManager.Sound.UI);
         GameManager.instance.cannon.setValues(input1, input2);
     }
 
     public void nextTarget() {
+        GameManager.instance.playSound(GameManager.Sound.UI);
         GameManager.instance.cannon.nextTarget();
     }
     public void prevTarget() {
+        GameManager.instance.playSound(GameManager.Sound.UI);
         GameManager.instance.cannon.prevTarget();
     }
     public void stopMinigame() {
+        GameManager.instance.playSound(GameManager.Sound.UI);
         GameManager.instance.cannon.exit();
     }
 
-    public void checkUI(bool finished, bool multipleTargets) {
+    public void checkUI(bool finished) {
         this.finished = finished;
-        this.multipleTargets = multipleTargets;
     }
 
     private void activeInteractables(bool set) {
@@ -132,6 +157,14 @@ public class UIManager : MonoBehaviour {
             Button_nextTarget.interactable = set;
             Button_prevTarget.interactable = set;
         }
+    }
+    public void ableShoot(bool completed) {
+        if (finished || completed) {
+            Button_Shoot.interactable = false;
+        } else {
+            Button_Shoot.interactable = true;
+        }
+
     }
 
     public void setmouseactive(bool set) {

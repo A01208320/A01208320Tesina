@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour {
     [Header("Ambient Values")]
-    [SerializeField] private Vector3 origin;
     [SerializeField] private float angle;
     [SerializeField] private float gravity;
     [SerializeField] private float distance;
@@ -13,6 +12,7 @@ public class Ball : MonoBehaviour {
     [SerializeField] private float V0;
     [SerializeField] private float Vx;
     [SerializeField] private float Vy;
+    [SerializeField] private Vector3 newPos;
 
     [Header("Time Values")]
     [SerializeField] private float duration;
@@ -20,61 +20,50 @@ public class Ball : MonoBehaviour {
 
     public Vector3 forward, up;
     public Quaternion rotation;
-    private bool ableMove;
     private float angleH;
 
 
-    public void init(int complex, float param1, float param2, float gravity, float distance, float angleH) {
-        origin = transform.position;
+    public void init(float V0, float Vx, float Vy, float angle, float gravity, float distance, float angleH) {
+        this.V0 = V0;
+        this.Vx = Vx;
+        this.Vy = Vy;
+        this.angle = angle;
         this.gravity = gravity;
         this.distance = distance;
         this.angleH = angleH;
-        ableMove = false;
-
-        if (complex == 0) { // Easy V0,a
-            V0 = param1;
-            angle = param2;
-            Vx = V0 * Mathf.Cos(angle * Mathf.Deg2Rad);
-            Vy = V0 * Mathf.Sin(angle * Mathf.Deg2Rad);
-        } else { // complex Vx, Vy
-            Vx = param1;
-            Vy = param2;
-        }
-
-        duration = distance / Vx;
-        elapsed = 0;
+        duration = (2 * V0 * Mathf.Sin(angle * Mathf.Deg2Rad)) / gravity;
     }
 
-    private void Update() {
-        if (!ableMove) {
-            return;
-        }
+    private IEnumerator move() {
+        elapsed = 0;
+        while (elapsed < duration) {
+            float x = Vx * elapsed;
+            float y = (Vy * elapsed) - (0.5f * gravity * elapsed * elapsed);
+            newPos = new Vector3(0, y, x);
+            transform.localPosition = transform.localRotation * newPos;
 
-        if (elapsed < duration) {
-            Vector3 newPos = new Vector3(0, (Vy - (gravity * elapsed)) * Time.deltaTime, Vx * Time.deltaTime);
-
-            forward = newPos.normalized;
-            rotation = Quaternion.LookRotation(forward);
-            up = rotation * Vector3.up;
-
-            transform.Translate(newPos);
+            Vector2 PosGround = new Vector2(transform.localPosition.x, transform.localPosition.z);
+            float dis = Vector2.Distance(Vector2.zero, PosGround);
+            GameManager.instance.ui.setDP(dis.ToString());
 
             elapsed += Time.deltaTime;
-        } else {
-            GameManager.instance.ui.setDP(distance.ToString());
-            GameManager.instance.ballLanded();
-            Destroy(this);
+            yield return null;
         }
-        float dis = Vector3.Distance(origin, new Vector3(transform.position.x, 0, transform.position.z));
-        if (distance <= dis) {
-            elapsed = duration;
-            dis = distance;
-        }
-        GameManager.instance.ui.setDP(dis.ToString());
+        transform.localPosition = transform.localRotation * new Vector3(0, 0, distance);
+        GameManager.instance.ui.setDP(distance.ToString());
+        GameManager.instance.cannon.Targets.getTarget().GetComponent<Target>().check(distance, gameObject);
+
+        yield return new WaitForSeconds(1f);
+        GameManager.instance.ballLanded();
     }
 
     public void startMoving() {
-        ableMove = true;
         transform.localRotation = Quaternion.Euler(0, angleH, 0);
+        StartCoroutine(move());
+    }
+
+    private void OnCollisionEnter(Collision other) {
+        StopCoroutine(move());
+        GameManager.instance.ballLanded();
     }
 }

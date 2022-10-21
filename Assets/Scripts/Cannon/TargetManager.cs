@@ -6,6 +6,12 @@ public class TargetManager : MonoBehaviour {
     [SerializeField] private int numbercorrect;
     [SerializeField] private int index = 0;
     [SerializeField] private int corrects;
+    private int actualChildren, numChildren;
+
+    private void Start() {
+        actualChildren = numChildren = transform.childCount;
+
+    }
 
     public Transform nextTarget() {
         index = (index + 1) % transform.childCount;
@@ -25,8 +31,7 @@ public class TargetManager : MonoBehaviour {
     }
 
     public bool checkFinished() {
-        index = 0;
-        return corrects == numbercorrect;
+        return numbercorrect <= corrects;
     }
 
     public int numTargets() {
@@ -42,5 +47,7 @@ public class TargetManager : MonoBehaviour {
     public float getDistance() {
         return Vector3.Distance(transform.localPosition, transform.GetChild(index).localPosition);
     }
-
+    public bool isCompleted() {
+        return !transform.GetChild(index).GetComponent<Target>().isValid();
+    }
 }
