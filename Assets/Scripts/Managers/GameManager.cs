@@ -21,16 +21,46 @@ public class GameManager : MonoBehaviour {
     public ProgressionManager progression;
     [Header("Sound Assets")]
     [SerializeField] public AudioClip CannonSound;
-    [SerializeField] public AudioClip BallCorrect;
-    [SerializeField] public AudioClip BallIncorrect;
+    [SerializeField] public AudioClip ConduitActivate;
+    [SerializeField] public AudioClip Lever;
+    [SerializeField] public AudioClip TargetHit;
+    [SerializeField] public AudioClip UI;
+    public enum Sound {
+        CannonSound,
+        ConduitActivate,
+        Lever,
+        TargetHit,
+        UI
+    }
 
 
     public void LoadScene(Loader.Scene scene) {
         Loader.Load(scene);
     }
 
-    public void playSound(SoundManager.Sound sound) {
-        SoundManager.PlaySound(sound);
+    public void playSound(Sound sound) {
+        AudioClip s;
+        switch (sound) {
+            case Sound.CannonSound:
+                s = CannonSound;
+                break;
+            case Sound.ConduitActivate:
+                s = ConduitActivate;
+                break;
+            case Sound.Lever:
+                s = Lever;
+                break;
+            case Sound.TargetHit:
+                s = TargetHit;
+                break;
+            case Sound.UI:
+                s = UI;
+                break;
+            default:
+                Debug.LogError("Sound not found");
+                return;
+        }
+        GetComponent<AudioSource>().PlayOneShot(s);
     }
 
     public void startCannonGame() {

@@ -11,6 +11,7 @@ public static class Loader {
         Level3,
         Level4,
         Level5,
+        Credis,
         practice,
         Exit
     }

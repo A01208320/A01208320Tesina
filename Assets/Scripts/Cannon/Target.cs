@@ -34,22 +34,24 @@ public class Target : MonoBehaviour {
         valid = true;
     }
 
-    public bool check(float distanceBall) {
-        if (!valid) {
-            return true;
-        }
+    public void check(float distanceBall, GameObject ball) {
         float real = Mathf.Abs(distance - distanceBall);
         if (real <= 0.01f) {
+            transform.parent.GetComponent<TargetManager>().setCorrect();
             if (isCorrect) {
                 particleCorrect.Play();
+                if (GameManager.instance.cannon.Targets.checkFinished()) {
+                    GameManager.instance.playSound(GameManager.Sound.ConduitActivate);
+                } else {
+                    GameManager.instance.playSound(GameManager.Sound.TargetHit);
+                }
             } else {
                 particleIncorrect.Play();
             }
-            transform.parent.GetComponent<TargetManager>().setCorrect();
             valid = false;
-            return false;
+        } else {
+            Destroy(ball, 2.0f);
         }
-        return true;
     }
 
     public bool isValid() {

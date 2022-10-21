@@ -9,6 +9,7 @@ public class Button_ChangeScene : MonoBehaviour {
         if (scene.ToString() == "Exit") {
             Application.Quit();
         }
+        GameManager.instance.playSound(GameManager.Sound.UI);
         GameManager.instance.LoadScene(scene);
     }
 }

@@ -15,6 +15,7 @@ public class ButtonStartCannon : MonoBehaviour {
 
     private IEnumerator activate() {
         GameManager.instance.lockPlayer();
+        GameManager.instance.playSound(GameManager.Sound.Lever);
         yield return new WaitForSeconds(1);
         transform.parent.GetComponent<CannonManager>().init();
     }

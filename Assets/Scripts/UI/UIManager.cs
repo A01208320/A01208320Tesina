@@ -116,16 +116,20 @@ public class UIManager : MonoBehaviour {
             float.TryParse(Input_Vx.text, out input1);
             float.TryParse(Input_Vy.text, out input2);
         }
+        GameManager.instance.playSound(GameManager.Sound.UI);
         GameManager.instance.cannon.setValues(input1, input2);
     }
 
     public void nextTarget() {
+        GameManager.instance.playSound(GameManager.Sound.UI);
         GameManager.instance.cannon.nextTarget();
     }
     public void prevTarget() {
+        GameManager.instance.playSound(GameManager.Sound.UI);
         GameManager.instance.cannon.prevTarget();
     }
     public void stopMinigame() {
+        GameManager.instance.playSound(GameManager.Sound.UI);
         GameManager.instance.cannon.exit();
     }
 

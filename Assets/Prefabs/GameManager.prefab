@@ -50,9 +50,11 @@ MonoBehaviour:
   cam: {fileID: 0}
   ui: {fileID: 0}
   progression: {fileID: 0}
-  CannonSound: {fileID: 0}
-  BallCorrect: {fileID: 0}
-  BallIncorrect: {fileID: 0}
+  CannonSound: {fileID: 8300000, guid: 7d0a865e6eeebea408ba51e36ca2155c, type: 3}
+  ConduitActivate: {fileID: 8300000, guid: a5af86271673f5f4bbd447e0e78a1113, type: 3}
+  Lever: {fileID: 8300000, guid: 18129cd2d81b92d41949818f46aca0bc, type: 3}
+  TargetHit: {fileID: 8300000, guid: 2cdb0d86bc41c7f45ba81efefbcb732f, type: 3}
+  UI: {fileID: 8300000, guid: 0ed025f435025fd43a17dbd37634e147, type: 3}
 --- !u!114 &2872600930338964483
 MonoBehaviour:
   m_ObjectHideFlags: 0

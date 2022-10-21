@@ -25,6 +25,9 @@ public class ActivateObjects : MonoBehaviour {
     }
 
     private IEnumerator moveObject(Transform obj, Vector3 desiredPos) {
+        if (obj.GetComponent<AudioSource>()) {
+            obj.GetComponent<AudioSource>().Play();
+        }
         Vector3 starting = obj.localPosition;
         obj.gameObject.SetActive(true);
         float elapsed = 0;
@@ -35,6 +38,9 @@ public class ActivateObjects : MonoBehaviour {
             yield return null;
         }
         obj.localPosition = desiredPos;
+        if (obj.GetComponent<AudioSource>()) {
+            obj.GetComponent<AudioSource>().Stop();
+        }
     }
 
     private void moveObjects() {

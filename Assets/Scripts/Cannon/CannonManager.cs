@@ -18,6 +18,7 @@ public class CannonManager : MonoBehaviour {
     [SerializeField] private ActivateObjects act;
     [Header("Calculated")]
     [SerializeField] public float distance;
+    [SerializeField] public float height;
     [Header("Adjust difficulty")]
     [SerializeField][Range(0, 1)] private int complex;
     [SerializeField] private bool random_gravity;
@@ -68,11 +69,6 @@ public class CannonManager : MonoBehaviour {
     }
 
     public void checkUI() {
-        bool deleteBall = Targets.getTarget().GetComponent<Target>().check(distance);
-        if (deleteBall) {
-            Destroy(ball);
-        }
-
         if (Targets.checkFinished()) {
             act.activate();
         }
@@ -128,7 +124,9 @@ public class CannonManager : MonoBehaviour {
 
         if (shot) {
             distance = V0 * V0 * (Mathf.Sin(2 * aV * Mathf.Deg2Rad)) / gravity;
+            height = (V0 * V0 * Mathf.Pow(Mathf.Sin(aV * Mathf.Deg2Rad), 2.0f)) / (2 * gravity);
             ball = Instantiate(ballPrefab, transform.position, transform.rotation, transform);
+            CameraPos.localPosition = Quaternion.Euler(0, aH, 0) * new Vector3(-2.0f, height, distance / 2.0f);
             GameManager.instance.cannonShoot(ball.transform);
             yield return new WaitForSeconds(1);
             Fire();
@@ -137,6 +135,7 @@ public class CannonManager : MonoBehaviour {
 
     public void Fire() {
         ball.GetComponent<Ball>().init(V0, Vx, Vy, aV, gravity, distance, aH);
+        GameManager.instance.playSound(GameManager.Sound.CannonSound);
         ball.GetComponent<Ball>().startMoving();
     }
 

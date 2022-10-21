@@ -10,6 +10,7 @@ public class SoundManager {
     }
 
     public static void PlaySound(Sound sound) {
+        /*
         GameObject soundObject = new GameObject();
         AudioSource audioSource = soundObject.AddComponent<AudioSource>();
         AudioClip s;
@@ -28,5 +29,6 @@ public class SoundManager {
                 return;
         }
         audioSource.PlayOneShot(s);
+        */
     }
 }

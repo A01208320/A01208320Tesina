@@ -51,6 +51,7 @@ public class Ball : MonoBehaviour {
         }
         transform.localPosition = transform.localRotation * new Vector3(0, 0, distance);
         GameManager.instance.ui.setDP(distance.ToString());
+        GameManager.instance.cannon.Targets.getTarget().GetComponent<Target>().check(distance, gameObject);
 
         yield return new WaitForSeconds(1f);
         GameManager.instance.ballLanded();

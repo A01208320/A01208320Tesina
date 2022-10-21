@@ -31,7 +31,7 @@ public class TargetManager : MonoBehaviour {
     }
 
     public bool checkFinished() {
-        return corrects == numbercorrect;
+        return numbercorrect <= corrects;
     }
 
     public int numTargets() {
