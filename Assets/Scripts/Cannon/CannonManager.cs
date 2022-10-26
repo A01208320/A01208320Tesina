@@ -126,7 +126,12 @@ public class CannonManager : MonoBehaviour {
             distance = V0 * V0 * (Mathf.Sin(2 * aV * Mathf.Deg2Rad)) / gravity;
             height = (V0 * V0 * Mathf.Pow(Mathf.Sin(aV * Mathf.Deg2Rad), 2.0f)) / (2 * gravity);
             ball = Instantiate(ballPrefab, transform.position, transform.rotation, transform);
-            CameraPos.localPosition = Quaternion.Euler(0, aH, 0) * new Vector3(-2.0f, height, distance / 2.0f);
+            int i = 1;
+            Debug.Log(model.transform.rotation.y);
+            if (model.transform.rotation.y < 0) {
+                i = -1;
+            }
+            CameraPos.localPosition = Quaternion.Euler(0, aH, 0) * new Vector3(2.0f * i, height, distance / 2.0f);
             GameManager.instance.cannonShoot(ball.transform);
             yield return new WaitForSeconds(1);
             Fire();
