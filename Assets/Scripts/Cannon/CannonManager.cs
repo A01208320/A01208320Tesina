@@ -178,7 +178,7 @@ public class CannonManager : MonoBehaviour {
 
     private void calcDirection() {
         V0 = Vector2.Distance(new Vector2(Vx, Vy), Vector2.zero);
-        aV = Mathf.Atan2(Vy, 0) * Mathf.Rad2Deg;
+        aV = Mathf.Atan(Vy / Vx) * Mathf.Rad2Deg;
     }
     private void calcComponents() {
         Vx = V0 * Mathf.Cos(aV * Mathf.Deg2Rad);
