@@ -58,6 +58,25 @@ public class UIManager : MonoBehaviour {
                 }
                 break;
             case 1: // Hard Vx, Vy
+                // Prepare Vx
+                if (fixed1) {
+                    Input_Vx.gameObject.SetActive(false);
+                    Text_Vx.gameObject.SetActive(true);
+                    Text_Vx.text = value1;
+                } else {
+                    Text_Vx.gameObject.SetActive(false);
+                    Input_Vx.gameObject.SetActive(true);
+                }
+
+                //Prepare Vy
+                if (fixed1) {
+                    Input_Vy.gameObject.SetActive(false);
+                    Text_Vy.gameObject.SetActive(true);
+                    Text_Vy.text = value2;
+                } else {
+                    Text_Vy.gameObject.SetActive(false);
+                    Input_Vy.gameObject.SetActive(true);
+                }
                 break;
         }
 
